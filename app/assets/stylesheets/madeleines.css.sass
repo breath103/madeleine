@@ -17,6 +17,9 @@ html, body
 	height: 100%
 	overflow: hidden
 	background-color: black
+	.contents
+		width: 100%
+		height: 100%
 
 .intro-cover
 	width: 100%
@@ -27,11 +30,7 @@ html, body
 	top: 0
 	background-color: white
 	text-align: center
-	.background-image
-		position: absolute
-		left: 0
-		top: 0
-		width: 100%
-		height: 100%
-		@include blur(5px)
-		background-size: auto auto
+
+.photo
+	position: absolute
+	display: none

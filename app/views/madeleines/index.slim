@@ -12,16 +12,11 @@ html
     == csrf_meta_tags
   body ng-app="madeleine"
     div class="main" ng-controller="SlidshowCtrl" ng-init="init(#{@madeleine.to_json})"
-      div mElementOutlet=""
-      div class="contents"
-        button type="button" onclick="madeleine.playAudio()" class="btn btn-primary"  
-          i class="glyphicon glyphicon-play"
-        button type="button" onclick="madeleine.requestFullScreen()" class="btn btn-danger"  
-          i class="glyphicon glyphicon-fullscreen"
+      div class="contents" m-outlet="contentsContainer"
         - @madeleine[:resources].each do |photo|
-          img src=photo[:source] onLoad=""
+          div class="photo" ng-controller="PhotoCtrl" m-outlet="element"
+            img src=photo[:source] m-outlet="image"
       div class="intro-cover" m-outlet="introCover" ng-click="play()"
-        div class="background-image" style="background-image:url('#{@madeleine[:cover_image]}')"
         div
           button type="button" class="btn btn-primary"  
             i class="glyphicon glyphicon-play" style="font-size: 40px"
