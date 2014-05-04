@@ -2,6 +2,8 @@ class MadeleinesController < ApplicationController
 	layout false
 	def index
 		@madeleine = {
+			title: "Paris",
+			cover_image: "http://th03.deviantart.net/fs70/PRE/i/2010/260/6/3/paris_alley_by_mitti707-d2xmsnl.jpg",
 			resources: [
 				{source: "http://th03.deviantart.net/fs70/PRE/i/2010/260/6/3/paris_alley_by_mitti707-d2xmsnl.jpg"},
 				{source: "http://24.media.tumblr.com/tumblr_m8yn6xyvmh1rdslvho1_1280.jpg"},
