@@ -1,0 +1,2 @@
+module MadeleinesHelper
+end

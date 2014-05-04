@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+/*** https://github.com/sindresorhus/screenfull.js ***/
+//= require screenfull/screenfull  
+
+/*** https://github.com/goldfire/howler.js ***/
+//= require howler.js/howler.js  
+
 //= require bootstrap
-//= require_tree .
