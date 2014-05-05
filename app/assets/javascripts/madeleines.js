@@ -38,6 +38,14 @@ $.fn.extend({
 				"-webkit-transform":"rotate(" + deg + "deg)" /* Opera, Chrome, and Safari */
 			});
 		});
+	},
+	addTransform: function(transform) {
+		var originalTransform = $(this).css("-webkit-transform");
+		$(this).css("-webkit-transform", originalTransform + " " + transform);
+	},
+	cssAnimationEnd: function(callback) {
+		$(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', callback);
+		return $(this);
 	}
 });
 
@@ -61,15 +69,26 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 	$scope.play = function(){
 		$scope.$introCover.addClass('animated flipOutY');
 		
-		// $scope.playAudio();
-		// $scope.requestFullScreen();
+//		$scope.playAudio();
+//		$scope.requestFullScreen();
 		var containerBounds = $scope.$contentsContainer.bounds();
 		$scope.enumrateChildScopes(function(childScope, index) {
 			$interval(function(){
 				childScope.$element
 											.css({display: "block"})
 											.centerAlign(containerBounds)
-											.addClass('animated bounceIn');
+											.addClass('animated bounceIn')
+											.cssAnimationEnd(function(){
+												$img = $(this).find("img");
+												$img.css({ "-webkit-filter": "brightness(100%) sepia(0%)" })
+														.transit({ "-webkit-filter": "brightness(60%) sepia(100%)" }, 
+																		 1000 * 2.5,
+																		 "linear");
+												$(this).transit({ top: "-=" + containerBounds.height + "px" }, 
+																				100 * containerBounds.height,
+																				"linear"
+																				);
+											});
 				childScope.$image.rotate(Math.random() * 60 - 30);
 			}, 3500 * index, 1);
 		});

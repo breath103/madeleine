@@ -1,12 +1,15 @@
 // Place all the styles related to the Madeleines controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin filter($value)
+	-webkit-filter: $value
+	-moz-filter: $value
+	-ms-filter: $value
+	-o-filter: $value
+	filter: $value
+
 @mixin blur($radius)
-	-webkit-filter: blur($radius)
-	-moz-filter: blur($radius)
-	-ms-filter: blur($radius)
-	-o-filter: blur($radius)
-	filter: blur($radius)
+	@include filter(blur($radius))
 
 html, body
 	width: 100%
@@ -34,3 +37,7 @@ html, body
 .photo
 	position: absolute
 	display: none
+	@include filter(grayscale(0))
+
+.grayscale
+	@include filter(grayscale(100%))

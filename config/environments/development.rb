@@ -51,4 +51,6 @@ Madeleine::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
+  FlickRaw.api_key = "96c856bca63ff7d2e34d552ff71d4753"
+  FlickRaw.shared_secret = "08e811d1fc1f7ca3"
 end

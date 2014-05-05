@@ -11,6 +11,9 @@ html
     == javascript_include_tag "madeleines"
     == csrf_meta_tags
   body ng-app="madeleine"
+    svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display:none"
+      filter id="greyscale"
+        feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"
     div class="main" ng-controller="SlidshowCtrl" ng-init="init(#{@madeleine.to_json})"
       div class="contents" m-outlet="contentsContainer"
         - @madeleine[:resources].each do |photo|

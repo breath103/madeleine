@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery_ujs
 
@@ -18,5 +19,8 @@
 
 /*** https://github.com/goldfire/howler.js ***/
 //= require howler.js/howler.js  
+
+/*** http://ricostacruz.com/jquery.transit ***/
+//= require jquery.transit.min.js
 
 //= require bootstrap

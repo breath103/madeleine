@@ -15,6 +15,10 @@ gem 'pg'
 gem 'rolify'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'flickraw'
+gem 'awesome_print'
+gem 'thin'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -26,16 +30,17 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
 end
+
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'pry-rails'
-  gem 'pry-rescue'
   gem 'rspec-rails'
-  gem 'thin'
+#  gem 'thin'
 end
+
 group :production do
-  gem 'unicorn'
+#  gem 'thin'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'
