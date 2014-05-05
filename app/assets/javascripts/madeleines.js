@@ -8,53 +8,27 @@ madeleine.directive('mOutlet', function() {
 	};
 });
 
-
-$.fn.extend({
-	bounds: function(){
-		var position = $(this).position();
-		return {
-			left: position.left,
-			top: position.top,
-			width: $(this).width(),
-			height: $(this).height()
-		};
-	},
-	centerAlign: function(super_bounds) {
-		return $(this).each(function(index) {
-			var $this = $(this);
-			var bounds = $this.bounds();
-			$this.css({
-				left: (super_bounds.width - bounds.width) / 2,
-				top: (super_bounds.height - bounds.height) / 2
-			});
-		});
-	}, 
-	rotate: function(deg){
-		return $(this).each(function(index) {
-			var $this = $(this);
-			$this.css({
-				"transform":"rotate(" + deg + "deg)",
-				"-ms-transform":"rotate(" + deg + "deg)",/* IE 9 */
-				"-webkit-transform":"rotate(" + deg + "deg)" /* Opera, Chrome, and Safari */
-			});
-		});
-	},
-	addTransform: function(transform) {
-		var originalTransform = $(this).css("-webkit-transform");
-		$(this).css("-webkit-transform", originalTransform + " " + transform);
-	},
-	cssAnimationEnd: function(callback) {
-		$(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', callback);
-		return $(this);
-	}
-});
+function getEnviroment(){
+	return $("#enviroment").html();
+}
 
 madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $interval) {
 	// shared : TODO check it's called only one time
 	sound = new Howl({ urls: ["music.mp3"] });
 
-	$scope.init = function() {
+	$scope.currentOrientation = 0;
 
+	$scope.init = function() {
+		var changeCallback = function(){
+			// if we change this value without this timeout block, angularJS couldn't recognize model change
+			setTimeout(function(){
+				alert("!!!!");
+		  	$scope.currentOrientation = window.orientation;
+		  	$(window).scrollTop();
+			}, 1);
+	  };
+		changeCallback();
+		window.addEventListener('orientationchange', changeCallback);
 	};
 
 	$scope.enumrateChildScopes = function(block) {	
@@ -69,8 +43,10 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 	$scope.play = function(){
 		$scope.$introCover.addClass('animated flipOutY');
 		
-		$scope.playAudio();
-		$scope.requestFullScreen();
+		if (getEnviroment() == "production") {
+			$scope.playAudio();
+			$scope.requestFullScreen();
+		}
 
 		var containerBounds = $scope.$contentsContainer.bounds();
 		$scope.enumrateChildScopes(function(childScope, index) {
@@ -87,10 +63,14 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 																		 "linear");
 												childScope.$element
 																			.transit({ y: "-=" + containerBounds.height + "px" }, 
-																							 100 * containerBounds.height,
-																							 "linear");
+																							  100 * containerBounds.height,
+																							  "linear"
+																							  );
+												// setTimeout(function(){
+												// 	childScope.$element.css({opacity: 1}).animate({opacity: 0});
+												// }, 1000);
 											});
-				childScope.$image.rotate(Math.random() * 60 - 30);
+				childScope.$image.rotate(Math.random() * 40 - 20);
 			}, 3500 * index, 1);
 		});
 	};

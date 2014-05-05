@@ -2,3 +2,6 @@
 	iOS7에서 풀화면으로 재생하게 하는게 문제가 있었는데, iOS7.1+ 부터는 웹페이지에 사파리에서 풀화면으로 재생하라고 명령하는게 가능
 	http://apple.stackexchange.com/questions/105589/is-it-possible-to-hide-the-address-bar-and-status-bar-in-ios-7-safari
 	https://developer.apple.com/library/iOs/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html
+
+	화면 비율을 유지하기 위해서는 스케일링을 먹이는 박스가 필요 (aspect ratio)
+	http://www.mademyday.de/css-height-equals-width-with-pure-css.html

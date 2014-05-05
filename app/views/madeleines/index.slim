@@ -1,24 +1,30 @@
 doctype html
 html
   head
-    meta[name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimal-ui"]
+    / meta name="apple-mobile-web-app-capable" content="yes"
+    / meta name="apple-mobile-web-app-status-bar-style" content="black"
+    / meta name="apple-mobile-web-app-title" content="AMC Walking Dead Story Sync"
+    meta[name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui"]
     title
-      = content_for?(:title) ? yield(:title) : 'Madeleine'
+      | Madeleine
     meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Madeleine'}"
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => true
     == javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"
     == javascript_include_tag 'application', 'data-turbolinks-track' => true
-    == javascript_include_tag "madeleines"
     == csrf_meta_tags
   body ng-app="madeleine"
+    div id="enviroment" style="display:none" = Rails.env
     div class="main" ng-controller="SlidshowCtrl" ng-init="init(#{@madeleine.to_json})"
-      div class="contents" m-outlet="contentsContainer"
-        - @madeleine[:resources].each do |photo|
-          div class="photo" ng-controller="PhotoCtrl" m-outlet="element"
-            div class="effect-container" m-outlet="effectContainer"
-              img src=photo[:source] m-outlet="image"
-      div class="intro-cover" m-outlet="introCover" ng-click="play()"
-        div
-          button type="button" class="btn btn-primary"  
-            i class="glyphicon glyphicon-play" style="font-size: 40px"
-          h3 style="color:blue" = @madeleine[:title]
+      div class="screen"
+        div class="contents" m-outlet="contentsContainer"
+          - @madeleine[:resources].each do |photo|
+            div class="photo" ng-controller="PhotoCtrl" m-outlet="element"
+              div class="effect-container" m-outlet="effectContainer"
+                img src=photo[:source] m-outlet="image"
+        div class="intro-cover" m-outlet="introCover" ng-click="play()"
+          div
+            button type="button" class="btn btn-primary"  
+              i class="glyphicon glyphicon-play" style="font-size: 40px"
+            h3 style="color:blue" = @madeleine[:title]
+            span 
+              | {{ currentOrientation }}

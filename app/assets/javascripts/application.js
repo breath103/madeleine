@@ -24,3 +24,6 @@
 //= require jquery.transit.min.js
 
 //= require bootstrap
+
+//= require jquery_ext
+//= require madeleines
