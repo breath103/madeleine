@@ -1,5 +1,3 @@
-require 'flickraw'
-
 class MadeleinesController < ApplicationController
 	layout false
 	def index

@@ -69,14 +69,15 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 	$scope.play = function(){
 		$scope.$introCover.addClass('animated flipOutY');
 		
-//		$scope.playAudio();
-//		$scope.requestFullScreen();
+		$scope.playAudio();
+		$scope.requestFullScreen();
+
 		var containerBounds = $scope.$contentsContainer.bounds();
 		$scope.enumrateChildScopes(function(childScope, index) {
 			$interval(function(){
-				childScope.$element
-											.css({display: "block"})
-											.centerAlign(containerBounds)
+				childScope.$element.css({display: "block"})
+													 .centerAlign(containerBounds)
+				childScope.$effectContainer
 											.addClass('animated bounceIn')
 											.cssAnimationEnd(function(){
 												$img = $(this).find("img");
@@ -84,10 +85,10 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 														.transit({ "-webkit-filter": "brightness(60%) sepia(100%)" }, 
 																		 1000 * 2.5,
 																		 "linear");
-												$(this).transit({ top: "-=" + containerBounds.height + "px" }, 
-																				100 * containerBounds.height,
-																				"linear"
-																				);
+												childScope.$element
+																			.transit({ y: "-=" + containerBounds.height + "px" }, 
+																							 100 * containerBounds.height,
+																							 "linear");
 											});
 				childScope.$image.rotate(Math.random() * 60 - 30);
 			}, 3500 * index, 1);
@@ -99,7 +100,8 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 	};
 
 	$scope.requestFullScreen = function() {
-		screenfull.request();
+		if (screenfull.enabled)
+			screenfull.request();
 	};
 }]);
 

@@ -60,7 +60,7 @@ Madeleine::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
+  
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
@@ -70,6 +70,9 @@ Madeleine::Application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
+
+  FlickRaw.api_key = "96c856bca63ff7d2e34d552ff71d4753"
+  FlickRaw.shared_secret = "08e811d1fc1f7ca3"
 
 
   config.action_mailer.default_url_options = { :host => 'example.com' }
