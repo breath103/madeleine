@@ -22,10 +22,9 @@ madeleine.controller('SlidshowCtrl', ['$scope', '$interval',  function($scope, $
 		var changeCallback = function(){
 			// if we change this value without this timeout block, angularJS couldn't recognize model change
 			setTimeout(function(){
-				alert("!!!!");
 		  	$scope.currentOrientation = window.orientation;
 		  	$(window).scrollTop();
-			}, 1);
+			}, 1000);
 	  };
 		changeCallback();
 		window.addEventListener('orientationchange', changeCallback);
