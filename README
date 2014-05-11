@@ -5,3 +5,7 @@
 
 	화면 비율을 유지하기 위해서는 스케일링을 먹이는 박스가 필요 (aspect ratio)
 	http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+2014/5/7 	
+	window에서 포커스가 나가면 모든 CSS애니메이션을 잠시 일시정지 시키고, 다시 잡히면 전부 다시 재생하도록
+	http://stackoverflow.com/questions/1408699/using-jquery-to-bind-focus-and-blur-functions-for-window-doesnt-work-in
+	http://www.w3schools.com/cssref/css3_pr_animation-play-state.asp
